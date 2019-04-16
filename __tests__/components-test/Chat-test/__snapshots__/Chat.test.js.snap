@@ -1,0 +1,848 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  id="ChatContainer"
+>
+  <RCTScrollView
+    data={
+      Array [
+        Object {
+          "id": "0",
+          "text": "abc0",
+          "type": "my",
+        },
+        Object {
+          "id": "1",
+          "text": "abc1",
+          "type": "other",
+        },
+        Object {
+          "id": "2",
+          "text": "abc2",
+          "type": "my",
+        },
+        Object {
+          "id": "3",
+          "text": "abc3",
+          "type": "other",
+        },
+        Object {
+          "id": "4",
+          "text": "abc4",
+          "type": "my",
+        },
+        Object {
+          "id": "5",
+          "text": "abc5",
+          "type": "other",
+        },
+        Object {
+          "id": "6",
+          "text": "abc6",
+          "type": "my",
+        },
+        Object {
+          "id": "7",
+          "text": "abc7",
+          "type": "other",
+        },
+        Object {
+          "id": "8",
+          "text": "abc8",
+          "type": "my",
+        },
+        Object {
+          "id": "9",
+          "text": "abc9",
+          "type": "other",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    extraData={
+      Object {
+        "messages": Array [
+          Object {
+            "id": "0",
+            "text": "abc0",
+            "type": "my",
+          },
+          Object {
+            "id": "1",
+            "text": "abc1",
+            "type": "other",
+          },
+          Object {
+            "id": "2",
+            "text": "abc2",
+            "type": "my",
+          },
+          Object {
+            "id": "3",
+            "text": "abc3",
+            "type": "other",
+          },
+          Object {
+            "id": "4",
+            "text": "abc4",
+            "type": "my",
+          },
+          Object {
+            "id": "5",
+            "text": "abc5",
+            "type": "other",
+          },
+          Object {
+            "id": "6",
+            "text": "abc6",
+            "type": "my",
+          },
+          Object {
+            "id": "7",
+            "text": "abc7",
+            "type": "other",
+          },
+          Object {
+            "id": "8",
+            "text": "abc8",
+            "type": "my",
+          },
+          Object {
+            "id": "9",
+            "text": "abc9",
+            "type": "other",
+          },
+        ],
+        "selectedBubble": null,
+      }
+    }
+    getItem={[Function]}
+    getItemCount={[Function]}
+    horizontal={false}
+    id="ChatList"
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onContentSizeChange={[Function]}
+    onEndReachedThreshold={2}
+    onLayout={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    style={
+      Object {
+        "backgroundColor": "white",
+        "width": "100%",
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    viewabilityConfigCallbackPairs={Array []}
+    windowSize={21}
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          className="GroupContainer"
+          style={
+            Array [
+              Object {
+                "alignItems": "baseline",
+                "display": "flex",
+                "flexDirection": "row-reverse",
+                "paddingHorizontal": 10,
+                "paddingVertical": 6,
+                "width": "100%",
+              },
+            ]
+          }
+        >
+          <View
+            className="BubbleContent"
+            style={
+              Object {
+                "display": "flex",
+                "marginHorizontal": 5,
+                "maxWidth": "65%",
+              }
+            }
+          >
+            <Text
+              className="BubbleText"
+              onPress={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#3578e5",
+                    "borderRadius": 20,
+                    "color": "white",
+                    "padding": 15,
+                  },
+                ]
+              }
+            >
+               sample text for message sample text for message sample text for message
+            </Text>
+          </View>
+          <Text
+            className="AcctionButton"
+            onPress={[Function]}
+            style={
+              Object {
+                "backgroundColor": "#eeeeee",
+                "borderRadius": 25,
+                "height": 50,
+                "textAlign": "center",
+                "textAlignVertical": "center",
+                "width": 50,
+              }
+            }
+          >
+            <Text>
+              Xóa
+            </Text>
+          </Text>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          className="GroupContainer"
+          style={
+            Array [
+              Object {
+                "alignItems": "baseline",
+                "display": "flex",
+                "flexDirection": "row-reverse",
+                "paddingHorizontal": 10,
+                "paddingVertical": 6,
+                "width": "100%",
+              },
+              Object {
+                "flexDirection": "row",
+              },
+            ]
+          }
+        >
+          <View
+            className="BubbleContent"
+            style={
+              Object {
+                "display": "flex",
+                "marginHorizontal": 5,
+                "maxWidth": "65%",
+              }
+            }
+          >
+            <Text
+              className="BubbleText"
+              onPress={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#3578e5",
+                    "borderRadius": 20,
+                    "color": "white",
+                    "padding": 15,
+                  },
+                  Object {
+                    "backgroundColor": "#eeeeee",
+                    "color": "black",
+                  },
+                ]
+              }
+            >
+               sample text for message sample text for message sample text for message
+            </Text>
+          </View>
+          <Text
+            className="AcctionButton"
+            onPress={[Function]}
+            style={
+              Object {
+                "backgroundColor": "#eeeeee",
+                "borderRadius": 25,
+                "height": 50,
+                "textAlign": "center",
+                "textAlignVertical": "center",
+                "width": 50,
+              }
+            }
+          >
+            <Text>
+              Xóa
+            </Text>
+          </Text>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          className="GroupContainer"
+          style={
+            Array [
+              Object {
+                "alignItems": "baseline",
+                "display": "flex",
+                "flexDirection": "row-reverse",
+                "paddingHorizontal": 10,
+                "paddingVertical": 6,
+                "width": "100%",
+              },
+            ]
+          }
+        >
+          <View
+            className="BubbleContent"
+            style={
+              Object {
+                "display": "flex",
+                "marginHorizontal": 5,
+                "maxWidth": "65%",
+              }
+            }
+          >
+            <Text
+              className="BubbleText"
+              onPress={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#3578e5",
+                    "borderRadius": 20,
+                    "color": "white",
+                    "padding": 15,
+                  },
+                ]
+              }
+            >
+               sample text for message sample text for message sample text for message
+            </Text>
+          </View>
+          <Text
+            className="AcctionButton"
+            onPress={[Function]}
+            style={
+              Object {
+                "backgroundColor": "#eeeeee",
+                "borderRadius": 25,
+                "height": 50,
+                "textAlign": "center",
+                "textAlignVertical": "center",
+                "width": 50,
+              }
+            }
+          >
+            <Text>
+              Xóa
+            </Text>
+          </Text>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          className="GroupContainer"
+          style={
+            Array [
+              Object {
+                "alignItems": "baseline",
+                "display": "flex",
+                "flexDirection": "row-reverse",
+                "paddingHorizontal": 10,
+                "paddingVertical": 6,
+                "width": "100%",
+              },
+              Object {
+                "flexDirection": "row",
+              },
+            ]
+          }
+        >
+          <View
+            className="BubbleContent"
+            style={
+              Object {
+                "display": "flex",
+                "marginHorizontal": 5,
+                "maxWidth": "65%",
+              }
+            }
+          >
+            <Text
+              className="BubbleText"
+              onPress={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#3578e5",
+                    "borderRadius": 20,
+                    "color": "white",
+                    "padding": 15,
+                  },
+                  Object {
+                    "backgroundColor": "#eeeeee",
+                    "color": "black",
+                  },
+                ]
+              }
+            >
+               sample text for message sample text for message sample text for message
+            </Text>
+          </View>
+          <Text
+            className="AcctionButton"
+            onPress={[Function]}
+            style={
+              Object {
+                "backgroundColor": "#eeeeee",
+                "borderRadius": 25,
+                "height": 50,
+                "textAlign": "center",
+                "textAlignVertical": "center",
+                "width": 50,
+              }
+            }
+          >
+            <Text>
+              Xóa
+            </Text>
+          </Text>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          className="GroupContainer"
+          style={
+            Array [
+              Object {
+                "alignItems": "baseline",
+                "display": "flex",
+                "flexDirection": "row-reverse",
+                "paddingHorizontal": 10,
+                "paddingVertical": 6,
+                "width": "100%",
+              },
+            ]
+          }
+        >
+          <View
+            className="BubbleContent"
+            style={
+              Object {
+                "display": "flex",
+                "marginHorizontal": 5,
+                "maxWidth": "65%",
+              }
+            }
+          >
+            <Text
+              className="BubbleText"
+              onPress={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#3578e5",
+                    "borderRadius": 20,
+                    "color": "white",
+                    "padding": 15,
+                  },
+                ]
+              }
+            >
+               sample text for message sample text for message sample text for message
+            </Text>
+          </View>
+          <Text
+            className="AcctionButton"
+            onPress={[Function]}
+            style={
+              Object {
+                "backgroundColor": "#eeeeee",
+                "borderRadius": 25,
+                "height": 50,
+                "textAlign": "center",
+                "textAlignVertical": "center",
+                "width": 50,
+              }
+            }
+          >
+            <Text>
+              Xóa
+            </Text>
+          </Text>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          className="GroupContainer"
+          style={
+            Array [
+              Object {
+                "alignItems": "baseline",
+                "display": "flex",
+                "flexDirection": "row-reverse",
+                "paddingHorizontal": 10,
+                "paddingVertical": 6,
+                "width": "100%",
+              },
+              Object {
+                "flexDirection": "row",
+              },
+            ]
+          }
+        >
+          <View
+            className="BubbleContent"
+            style={
+              Object {
+                "display": "flex",
+                "marginHorizontal": 5,
+                "maxWidth": "65%",
+              }
+            }
+          >
+            <Text
+              className="BubbleText"
+              onPress={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#3578e5",
+                    "borderRadius": 20,
+                    "color": "white",
+                    "padding": 15,
+                  },
+                  Object {
+                    "backgroundColor": "#eeeeee",
+                    "color": "black",
+                  },
+                ]
+              }
+            >
+               sample text for message sample text for message sample text for message
+            </Text>
+          </View>
+          <Text
+            className="AcctionButton"
+            onPress={[Function]}
+            style={
+              Object {
+                "backgroundColor": "#eeeeee",
+                "borderRadius": 25,
+                "height": 50,
+                "textAlign": "center",
+                "textAlignVertical": "center",
+                "width": 50,
+              }
+            }
+          >
+            <Text>
+              Xóa
+            </Text>
+          </Text>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          className="GroupContainer"
+          style={
+            Array [
+              Object {
+                "alignItems": "baseline",
+                "display": "flex",
+                "flexDirection": "row-reverse",
+                "paddingHorizontal": 10,
+                "paddingVertical": 6,
+                "width": "100%",
+              },
+            ]
+          }
+        >
+          <View
+            className="BubbleContent"
+            style={
+              Object {
+                "display": "flex",
+                "marginHorizontal": 5,
+                "maxWidth": "65%",
+              }
+            }
+          >
+            <Text
+              className="BubbleText"
+              onPress={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#3578e5",
+                    "borderRadius": 20,
+                    "color": "white",
+                    "padding": 15,
+                  },
+                ]
+              }
+            >
+               sample text for message sample text for message sample text for message
+            </Text>
+          </View>
+          <Text
+            className="AcctionButton"
+            onPress={[Function]}
+            style={
+              Object {
+                "backgroundColor": "#eeeeee",
+                "borderRadius": 25,
+                "height": 50,
+                "textAlign": "center",
+                "textAlignVertical": "center",
+                "width": 50,
+              }
+            }
+          >
+            <Text>
+              Xóa
+            </Text>
+          </Text>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          className="GroupContainer"
+          style={
+            Array [
+              Object {
+                "alignItems": "baseline",
+                "display": "flex",
+                "flexDirection": "row-reverse",
+                "paddingHorizontal": 10,
+                "paddingVertical": 6,
+                "width": "100%",
+              },
+              Object {
+                "flexDirection": "row",
+              },
+            ]
+          }
+        >
+          <View
+            className="BubbleContent"
+            style={
+              Object {
+                "display": "flex",
+                "marginHorizontal": 5,
+                "maxWidth": "65%",
+              }
+            }
+          >
+            <Text
+              className="BubbleText"
+              onPress={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#3578e5",
+                    "borderRadius": 20,
+                    "color": "white",
+                    "padding": 15,
+                  },
+                  Object {
+                    "backgroundColor": "#eeeeee",
+                    "color": "black",
+                  },
+                ]
+              }
+            >
+               sample text for message sample text for message sample text for message
+            </Text>
+          </View>
+          <Text
+            className="AcctionButton"
+            onPress={[Function]}
+            style={
+              Object {
+                "backgroundColor": "#eeeeee",
+                "borderRadius": 25,
+                "height": 50,
+                "textAlign": "center",
+                "textAlignVertical": "center",
+                "width": 50,
+              }
+            }
+          >
+            <Text>
+              Xóa
+            </Text>
+          </Text>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          className="GroupContainer"
+          style={
+            Array [
+              Object {
+                "alignItems": "baseline",
+                "display": "flex",
+                "flexDirection": "row-reverse",
+                "paddingHorizontal": 10,
+                "paddingVertical": 6,
+                "width": "100%",
+              },
+            ]
+          }
+        >
+          <View
+            className="BubbleContent"
+            style={
+              Object {
+                "display": "flex",
+                "marginHorizontal": 5,
+                "maxWidth": "65%",
+              }
+            }
+          >
+            <Text
+              className="BubbleText"
+              onPress={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#3578e5",
+                    "borderRadius": 20,
+                    "color": "white",
+                    "padding": 15,
+                  },
+                ]
+              }
+            >
+               sample text for message sample text for message sample text for message
+            </Text>
+          </View>
+          <Text
+            className="AcctionButton"
+            onPress={[Function]}
+            style={
+              Object {
+                "backgroundColor": "#eeeeee",
+                "borderRadius": 25,
+                "height": 50,
+                "textAlign": "center",
+                "textAlignVertical": "center",
+                "width": 50,
+              }
+            }
+          >
+            <Text>
+              Xóa
+            </Text>
+          </Text>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          className="GroupContainer"
+          style={
+            Array [
+              Object {
+                "alignItems": "baseline",
+                "display": "flex",
+                "flexDirection": "row-reverse",
+                "paddingHorizontal": 10,
+                "paddingVertical": 6,
+                "width": "100%",
+              },
+              Object {
+                "flexDirection": "row",
+              },
+            ]
+          }
+        >
+          <View
+            className="BubbleContent"
+            style={
+              Object {
+                "display": "flex",
+                "marginHorizontal": 5,
+                "maxWidth": "65%",
+              }
+            }
+          >
+            <Text
+              className="BubbleText"
+              onPress={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#3578e5",
+                    "borderRadius": 20,
+                    "color": "white",
+                    "padding": 15,
+                  },
+                  Object {
+                    "backgroundColor": "#eeeeee",
+                    "color": "black",
+                  },
+                ]
+              }
+            >
+               sample text for message sample text for message sample text for message
+            </Text>
+          </View>
+          <Text
+            className="AcctionButton"
+            onPress={[Function]}
+            style={
+              Object {
+                "backgroundColor": "#eeeeee",
+                "borderRadius": 25,
+                "height": 50,
+                "textAlign": "center",
+                "textAlignVertical": "center",
+                "width": 50,
+              }
+            }
+          >
+            <Text>
+              Xóa
+            </Text>
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
