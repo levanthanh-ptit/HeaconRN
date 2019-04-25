@@ -3,6 +3,8 @@ import { Text, View, Button, FlatList } from 'react-native'
 import { Styles, BubbleColor } from './ChatStyle'
 import Bubble from './Bubble/Bubble'
 import TypingBar from './TypingBar/TypingBar'
+import I from '../UI/AppIcon'
+
 export default class Chat extends Component {
   state = {
     messages: null,
@@ -65,22 +67,24 @@ export default class Chat extends Component {
   }
 
   render() {
+    const buttonIconSize = 20;
+    const buttonIconColor = '#666';
     var addActtionButton = {
       id: 1,
       action: null,
-      content: <Text>+</Text>,
+      content: <I name={'smile-o'} color={buttonIconColor} size={buttonIconSize}/>,
       position: 'left'
     }
     var addImageActtionButton = {
       id: 2,
       action: null,
-      content: <Text>+</Text>,
+      content: <I name={'image'} color={buttonIconColor} size={buttonIconSize}/>,
       position: 'left'
     }
     var sendActtionButton = {
       id: 3,
       action: null,
-      content: <Text>Send</Text>,
+      content: <I name={'send'} color={'#DC143C'} size={buttonIconSize}/>,
       position: 'right'
     }
     return (

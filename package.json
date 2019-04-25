@@ -10,6 +10,8 @@
     "react": "16.8.3",
     "react-native": "0.59.0",
     "react-native-gesture-handler": "^1.1.0",
+    "react-native-smart-emoji-picker": "^0.1.2",
+    "react-native-vector-icons": "^6.4.2",
     "react-navigation": "^3.3.2",
     "redux": "^4.0.1"
   },

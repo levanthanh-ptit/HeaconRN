@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, Dimensions, Image, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
+import I from '../UI/AppIcon'
 
 export default class FriendBlock extends Component {
     static propTypes = {
@@ -22,9 +23,10 @@ export default class FriendBlock extends Component {
             <TouchableOpacity style={Styles.friendBlockMainContainer}
                 onPress={this._onPress}
             >
-                <Image style={Styles.friendAvatar}
-                // source={(this.props.friendImageUrl==='')?'src/static/assets/user-circle-solid.svg':this.props.friendImageUrl}
-                />
+                <View style={Styles.friendAvatar}>
+                   <I name="user" color="#ffffff" size={35}/>
+                </View>
+
                 <View style={[Styles.friendDetail,]}>
                     <Text style={Styles.friendName}>
                         {this.props.friendName}
@@ -36,7 +38,7 @@ export default class FriendBlock extends Component {
             </TouchableOpacity>
         )
     }
-}   
+}
 const Styles = StyleSheet.create({
     friendBlockMainContainer: {
         width: '100%',
@@ -53,8 +55,12 @@ const Styles = StyleSheet.create({
         height: 50,
         width: 50,
         backgroundColor: 'pink',
+        display: 'flex',
+        justifyContent: "center",
+        alignItems: 'center',
         marginRight: 10,
         borderRadius: 25,
+        fontSize: 20,
     },
     friendDetail: {
         flexGrow: 1,
