@@ -1,6 +1,7 @@
 var constant = require('../../../static/constant');
-import { AsyncStorage } from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 import * as ATs from '../actions/ActionTypes';
+import { awaitExpression } from '@babel/types';
 
 export const signUpStart = () => ({
     type: ATs.SIGNUP_START,
@@ -75,11 +76,13 @@ export const signIn = (userName, password) => {
         let res = await fetch(constant.server + '/login', option)
         if (res.status == 200) {
             let resJson = await res.json()
+            console.log(resJson);
+
             await dispatch(await signInSuccess(resJson.token));
-            AsyncStorage.setItem('token', resJson.token);
+            await AsyncStorage.setItem('token', await resJson.token);
         }
         else {
-            await dispatch(signInFail());            
+            await dispatch(signInFail());
         }
     }
 }
@@ -91,6 +94,6 @@ export const sessionSignIn = (token) => {
 export const logOut = () => {
     return dispatch => {
         dispatch(signInReset())
-        AsyncStorage.removeItem('token');
+        AsyncStorage.removeItem('token')
     }
 }

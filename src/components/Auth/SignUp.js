@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, DatePickerAndroid } from 'react-native'
-import { Input, CheckBox } from 'react-native-elements';
+ import { Input, CheckBox, ThemeProvider } from 'react-native-elements';
 import { connect } from 'react-redux'
-import { ThemeProvider } from 'react-native-elements';
 import { signUp } from '../../redux/actions/AuthAction'
 export class SignUp extends Component {
     constructor(props) {
@@ -62,7 +61,6 @@ export class SignUp extends Component {
             ],
             userName: 'levanthanh001',
             password: '123456Aa',
-            // confirmPassword: '',
             firstName: 'Lê',
             lastName: 'Thành',
             gender: 'male',
@@ -70,40 +68,40 @@ export class SignUp extends Component {
         }
     }
     _renderField() {
-        return this.state.elememts.map(el => {
-            if (el.name === 'gender') {
-                var checkboxs = el.option.map(op => {
-                    return <CheckBox
-                        key={el.option.indexOf(op)}
-                        containerStyle={Styles.checkBox}
-                        textStyle={Styles.title}
-                        title={op.label}
-                        checkedIcon='dot-circle-o'
-                        uncheckedIcon='circle-o'
-                        uncheckedColor='#ffffff'
-                        checked={this.state[el.name] === op.value}
-                        onPress={() => this.onChange_handle(el.name, op.value)}
-                    />
-                })
-                return <View key={el.name} style={Styles.inputBox}>
-                    {checkboxs}
-                </View>
-            }
-            else
-                return <View key={el.name} style={Styles.inputBox}>
-                    <Input
-                        label={el.label}
-                        labelStyle={Styles.title}
-                        placeholder={el.placeholder}
-                        textContentType={el.textContentType}
-                        inputStyle={Styles.input}
-                        onChangeText={e => this.onChange_handle(el.name, e)}
-                        value={this.state[el.name]}
-                        secureTextEntry={el.secureTextEntry}
-                        errorMessage={el.errorMessage}
-                    />
-                </View>
-        })
+         return this.state.elememts.map(el => {
+             if (el.name === 'gender') {
+                 var checkboxs = el.option.map(op => {
+                     return <CheckBox
+                         key={el.option.indexOf(op)}
+                         containerStyle={Styles.checkBox}
+                         textStyle={Styles.title}
+                         title={op.label}
+                         checkedIcon='dot-circle-o'
+                         uncheckedIcon='circle-o'
+                         uncheckedColor='#ffffff'
+                         checked={this.state[el.name] === op.value}
+                         onPress={() => this.onChange_handle(el.name, op.value)}
+                     />
+                 })
+                 return <View key={el.name} style={Styles.inputBox}>
+                     {checkboxs}
+                 </View>
+             }
+             else
+                 return <View key={el.name} style={Styles.inputBox}>
+                     <Input
+                         label={el.label}
+                         labelStyle={Styles.title}
+                         placeholder={el.placeholder}
+                         textContentType={el.textContentType}
+                         inputStyle={Styles.input}
+                         onChangeText={e => this.onChange_handle(el.name, e)}
+                         value={this.state[el.name]}
+                         secureTextEntry={el.secureTextEntry}
+                         errorMessage={el.errorMessage}
+                     />
+                 </View>
+         })
     }
     async onOpenDatePicker() {
         try {
@@ -179,7 +177,7 @@ export class SignUp extends Component {
             + this.state.birthday.year
             : ''
         return (
-            <ThemeProvider>
+             <ThemeProvider>
                 <View style={Styles.signUpMainContainer}>
                     <Text style={Styles.h1}>Tạo tài khoản</Text>
                     {elements}
@@ -190,7 +188,7 @@ export class SignUp extends Component {
                         <Text style={Styles.btn_title}>Tạo</Text>
                     </TouchableOpacity >
                 </View>
-            </ThemeProvider>
+             </ThemeProvider>
         )
     }
 }
