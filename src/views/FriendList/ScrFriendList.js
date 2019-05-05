@@ -1,15 +1,25 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import FriendList from '../../components/FriendList/FriendList'
+import Background from '../../components/UI/Background'
+
 export default class ScrFriendList extends Component {
-    static navigationOptions = ({ navigation }) => {
-        return <View style={Styles.navigationHeader}>
-            <Text style={Styles.navigationTitle}>Friend list</Text>
-        </View>
-    };
+    static navigationOptions = ({ navigation }) => ({
+        headerTitle:
+            <View style={Styles.navigationHeader}>
+                <Text style={Styles.navigationTitle}>Friend list</Text>
+            </View>,
+        headerStyle: {
+            // backgroundColor: 'blue',
+        }
+    });
     render() {
         return (
-            <FriendList navigation={this.props.navigation}/>
+            <Background
+                id='FriendListContainer'>
+                <FriendList navigation={this.props.navigation} />
+            </Background>
+
         )
     }
 }
@@ -22,6 +32,7 @@ const Styles = StyleSheet.create({
     navigationTitle: {
         fontSize: 24,
         fontWeight: 'bold',
+        color: '#333'
     },
 })
 

@@ -1,30 +1,51 @@
 import React, { Component } from 'react'
 import { Text, View, Button, TouchableOpacity } from 'react-native'
-import { styles } from './HomeStyle'
+import { Styles } from './HomeStyle'
+import I from '../UI/AppIcon';
 
 export default class Home extends Component {
+  redirect = (path, param) => {
+    this.props.navigation.navigate(path, param)
+  }
   render() {
     return (
       <View id='SettingContainer'
-        style={styles.WrapedContainer}
+        style={Styles.WrapedContainer}
       >
         <TouchableOpacity
-          style={[styles.button, styles.boxWithShadow, styles.matching_button]}
-          onPress={() => this.props.navigation.navigate('HomeSetting')} >
-          <Text style={styles.icon}>&hearts;</Text>
+          style={[Styles.button, Styles.boxWithShadow, Styles.balloon, Styles.info_button]}
+          onPress={() => this.redirect('UserInfo', null)} >
+          <View style={[Styles.balloon_title]}>
+            <I type="avatar" color="#ffffff" size="medium" />
+          </View>
+          <View style={[Styles.balloon_rope_box]}>
+            <View style={[Styles.balloon_rope]}></View>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.button, styles.boxWithShadow, styles.chat_button]}
+          style={[Styles.button, Styles.boxWithShadow, Styles.balloon, Styles.matching_button]}
+          onPress={() => this.redirect('HomeSetting')} >
+          <View style={[Styles.icon, Styles.balloon_title]}>
+            <I name="heart" color="#ffffff" size="large" />
+          </View>
+
+          {/* balloon rope css */}
+          <View style={[Styles.balloon_rope_box]}>
+            <View style={[Styles.balloon_rope]}></View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[Styles.button, Styles.btn_large, Styles.boxWithShadow, Styles.balloon, Styles.chat_button]}
           title="chat"
-          onPress={() => this.props.navigation.navigate('FriendList')}>
-          <Text style={styles.button_title}>FRIENDS</Text>
+          onPress={() => this.redirect('FriendList')}>
+          <Text style={[Styles.btn_title, Styles.balloon_title]}>FRIENDS</Text>
+
+          {/* balloon rope css */}
+          <View style={[Styles.balloon_rope_box]}>
+            <View style={[Styles.balloon_rope]}></View>
+          </View>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.button, styles.boxWithShadow, styles.setting_button]}
-          onPress={() => this.props.navigation.navigate('HomeSetting')} >
-          <Text style={styles.button_title}>SETTING</Text>
-        </TouchableOpacity>
-      </View >
+      </View>
     )
   }
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, FlatList } from 'react-native'
 import FriendBlock from './FriendBlock'
+import ChatHeader from '../UI/ChatHeader';
+
 export default class FriendList extends Component {
 
     constructor(props) {
@@ -25,9 +27,15 @@ export default class FriendList extends Component {
         })
     }
     _onPressItem = (friendId) => {
+        var f_name = this.state.friends.map( e =>{
+            if(e.friendId==friendId) return e.name
+        })
+        // var chatHeader = <ChatHeader name={f_name}/>;
         this.props.navigation.navigate('Chat',{
             userId:'999999',
             targerId: friendId,
+            friendName: f_name,
+            
         })
     }
     _keyExtractor = (item, index) => item.friendId;
@@ -61,7 +69,6 @@ export default class FriendList extends Component {
 const Styles = StyleSheet.create({
     FriendListMainContainer: {
         width: "100%",
-        backgroundColor: 'white',
         display: 'flex',
         height: '100%',
         padding: 5,

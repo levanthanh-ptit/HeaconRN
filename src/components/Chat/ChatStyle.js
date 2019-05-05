@@ -7,7 +7,6 @@ export const Styles = StyleSheet.create({
   },
   ListBubbleWrapedContainer: {
     width: "100%",
-    backgroundColor: 'white', 
     display: 'flex',
     height: '100%',
   }

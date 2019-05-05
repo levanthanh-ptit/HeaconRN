@@ -55,7 +55,9 @@ const Style = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         padding: 2,
-
+        borderTopWidth: 1,
+        borderTopColor: '#ddd',
+        backgroundColor: '#ffffff',
     },
     TypingActionButton: {
         display: 'flex',

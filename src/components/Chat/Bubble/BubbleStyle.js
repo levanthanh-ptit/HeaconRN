@@ -13,6 +13,15 @@ export const Styles = StyleSheet.create({
   WrapBubbleContainerLeft: {
     flexDirection: 'row',
   },
+  Avatar:{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 40,
+    width: 40,
+    borderRadius: 50,
+    backgroundColor: 'pink',
+  },
   BubbleContent: {
     display: 'flex',
     justifyContent: 'center',
@@ -51,10 +60,11 @@ export const Styles = StyleSheet.create({
     backgroundColor: Color.darkGrey,
   },
   ActionButton: {
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    height: 50,
-    width: 50,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 40,
+    width: 40,
     borderRadius: 25,
     backgroundColor: Color.grey,
   },

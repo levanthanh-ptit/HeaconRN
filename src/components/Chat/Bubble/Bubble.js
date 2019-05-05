@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Text, View } from 'react-native'
+import { Text, View, TouchableOpacity } from 'react-native'
 import { Styles } from './BubbleStyle'
 import ExplandableView from '../../CustomAnimationView/ExplandableView'
 import FadeInView from '../../CustomAnimationView/FadeInView'
-
+import I from '../../UI/AppIcon';
 export default class Bubble extends Component {
   static propTypes = {
     id: PropTypes.any,
@@ -12,8 +12,9 @@ export default class Bubble extends Component {
     onPressItem: PropTypes.func,
     selected: PropTypes.bool,
     onPressAction: PropTypes.func,
-    ActionElement: PropTypes.func,
+    ActionElement: PropTypes.any,
     content: PropTypes.any,
+    date: PropTypes.string,
   }
   _onPressBubble = () => {
     this.props.onPressItem(this.props.id);
@@ -42,6 +43,15 @@ export default class Bubble extends Component {
         className='GroupContainer'
         style={GroupContainerStyle}
       >
+        {(this.props.type == 'other') ? (
+          this.props.avatar ? (
+            this.props.avatar
+          ) : (
+              <View style={Styles.Avatar}>
+                <I type="avatar" color='#ffffff' />
+              </View>
+            )
+        ) : null}
         <View
           className='BubbleContent'
           style={Styles.BubbleContent}
@@ -49,7 +59,7 @@ export default class Bubble extends Component {
           {this.props.selected && <ExplandableView
             style={Styles.BubbleBefore}
           >
-            <Text> 10:24 </Text>
+            <Text>{this.props.date}</Text>
           </ExplandableView>}
           {React.cloneElement(this.props.content,
             {
@@ -67,13 +77,13 @@ export default class Bubble extends Component {
         </View>
 
         {this.props.selected && <FadeInView>
-          <Text
+          <TouchableOpacity
             className='AcctionButton'
             style={Styles.ActionButton}
             onPress={this._onPressAction}
           >
-            Xoa
-        </Text>
+            {this.props.ActionElement}
+          </TouchableOpacity>
         </FadeInView>}
       </View>
     )

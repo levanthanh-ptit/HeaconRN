@@ -10,11 +10,11 @@ export default class FriendBlock extends Component {
         friendLastMessage: PropTypes.string,
         onPress: PropTypes.func,
     }
-    _calculateFriendDetailBoxSize = () => {
-        var device_width = Dimensions.get('window').width;
-        var FriendDetailBoxWidth = device_width - (Styles.friendAvatar.width + Styles.friendAvatar.margin * 2 + 10);
-        return FriendDetailBoxWidth = FriendDetailBoxWidth * 100.0 / device_width + '%'
-    }
+    // _calculateFriendDetailBoxSize = () => {
+    //     var device_width = Dimensions.get('window').width;
+    //     var FriendDetailBoxWidth = device_width - (Styles.friendAvatar.width + Styles.friendAvatar.margin * 2 + 10);
+    //     return FriendDetailBoxWidth = FriendDetailBoxWidth * 100.0 / device_width + '%'
+    // }
     _onPress = () => {
         this.props.onPress(this.props.id)
     }
@@ -24,7 +24,14 @@ export default class FriendBlock extends Component {
                 onPress={this._onPress}
             >
                 <View style={Styles.friendAvatar}>
-                   <I name="user" color="#ffffff" size={35}/>
+                    {this.props.avatar ? (
+                        null
+                    ) : (
+                            <I type="avatar"
+                                color={Styles.friendAvatar.color}
+                                size={Styles.friendAvatar.fontSize}
+                            />
+                        )}
                 </View>
 
                 <View style={[Styles.friendDetail,]}>
@@ -60,7 +67,8 @@ const Styles = StyleSheet.create({
         alignItems: 'center',
         marginRight: 10,
         borderRadius: 25,
-        fontSize: 20,
+        fontSize: 30,
+        color: "#ffffff",
     },
     friendDetail: {
         flexGrow: 1,
