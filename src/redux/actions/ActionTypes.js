@@ -2,6 +2,7 @@ export const SIGNIN_START = 'SIGNIN_START';
 export const SIGNIN_FAIL = 'SIGNIN_FAIL';
 export const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS';
 export const SIGNIN_RESET = 'SIGNIN_RESET';
+export const SIGNIN_SESSION = 'SIGNIN_SESSION';
 
 export const SIGNUP_START = 'SIGNUP_START';
 export const SIGNUP_FAIL = 'SIGNUP_FAIL';

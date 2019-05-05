@@ -40,7 +40,6 @@ export default class FriendList extends Component {
     }
     _keyExtractor = (item, index) => item.friendId;
     _renderFriendBock = ({ item }) => {
-        console.log(item);
         return <FriendBlock
             key={item.friendId}
             id={item.friendId}

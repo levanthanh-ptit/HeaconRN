@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import { signIn } from '../../redux/actions/AuthAction';
 
 export class SignIn extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            username: '',
-            password: '',
+            userName: 'a',
+            password: 'a',
         }
     }
-    redirect(path, param){
+    redirect(path, param) {
         this.props.navigation.navigate(path, param)
     }
     onChange_handle(name, value) {
@@ -18,10 +19,10 @@ export class SignIn extends Component {
             [name]: value
         })
     }
-    onSubmit(){
-        alert('login')
+    onSubmit() {
+        this.props.onSignIn(this.state.userName, this.state.password)
     }
-     render() {
+    render() {
         return (
             <View style={Styles.signInMainContainer}>
                 <Text style={Styles.h1}>Đăng Nhập</Text>
@@ -32,8 +33,8 @@ export class SignIn extends Component {
                     <TextInput
                         textContentType='username'
                         style={Styles.input}
-                        onChangeText={e => this.onChange_handle('username', e)}
-                        value={this.state.username} />
+                        onChangeText={e => this.onChange_handle('userName', e)}
+                        value={this.state.userName} />
                 </View>
                 <View style={Styles.inputBox}>
                     <Text
@@ -46,6 +47,9 @@ export class SignIn extends Component {
                         onChangeText={e => this.onChange_handle('password', e)}
                         value={this.state.password} />
                 </View>
+                {(this.props.Auth.signinStatus === 'fail') && <Text style={Styles.errorMessage}>
+                    Sai thông tin đăng nhập
+                    </Text>}
                 <TouchableOpacity
                     style={[Styles.inputBox, Styles.button]}
                     onPress={() => this.onSubmit()}
@@ -86,6 +90,11 @@ const Styles = StyleSheet.create({
         height: 30,
         fontSize: 25
     },
+    errorMessage: {
+        height: 30,
+        fontSize: 25,
+        color: 'red',
+    },
     input: {
         width: '100%',
         fontSize: 20,
@@ -119,8 +128,8 @@ const mapStateToProps = (state) => ({
     Auth: state.Auth,
 })
 
-const mapDispatchToProps = dispatch = {
-    onSignIn: null,
-}
+const mapDispatchToProps = dispatch => ({
+    onSignIn: (userName, password) => dispatch(signIn(userName, password)),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

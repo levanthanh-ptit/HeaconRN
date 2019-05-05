@@ -46,6 +46,12 @@ export default (state = initialState, action) => {
       return {
         ...initialState
       };
+    case ActionTypes.SIGNIN_SESSION:
+      return {
+        ...state,
+        token: action.token,
+        signinStatus: 'success',
+      };
     default:
       return state
   }

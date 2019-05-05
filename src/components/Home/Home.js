@@ -14,7 +14,7 @@ export default class Home extends Component {
       >
         <TouchableOpacity
           style={[Styles.button, Styles.boxWithShadow, Styles.balloon, Styles.info_button]}
-          onPress={() => this.redirect('UserInfo', null)} >
+          onPress={() => this.redirect('Info', null)} >
           <View style={[Styles.balloon_title]}>
             <I type="avatar" color="#ffffff" size="medium" />
           </View>

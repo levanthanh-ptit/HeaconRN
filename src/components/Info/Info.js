@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity, DatePickerAndroid } from 'rea
 import { Input, CheckBox } from 'react-native-elements';
 import { connect } from 'react-redux'
 import { ThemeProvider } from 'react-native-elements';
-import { signUp } from '../../redux/actions/AuthAction'
-export class SignUp extends Component {
+import { logOut } from '../../redux/actions/AuthAction'
+export class Info extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -166,18 +166,10 @@ export class SignUp extends Component {
         await this.setState({
             elememts: elms
         })
-        if (isSubmitable)
-            await this.props.onSignUp(
-                this.state.userName,
-                this.state.password,
-                this.state.firstName,
-                this.state.lastName,
-                this.state.birthday,
-                this.state.gender
-            )
+        // if (isSubmitable)
+           
     }
     render() {
-        if (this.props.Auth.signupStatus === 'success') alert('signup success!')
         var elements = this._renderField();
         const birthday = (this.state.birthday.day && this.state.birthday.month && this.state.birthday.year) ?
             this.state.birthday.day + '/'
@@ -187,13 +179,19 @@ export class SignUp extends Component {
         return (
             <ThemeProvider>
                 <View style={Styles.signUpMainContainer}>
-                    <Text style={Styles.h1}>Tạo tài khoản</Text>
+                    <Text style={Styles.h1}>Thông tin tài khoản</Text>
                     {elements}
                     <TouchableOpacity
                         style={[Styles.inputBox, Styles.button]}
                         onPress={() => this.onSubmit()}
                     >
-                        <Text style={Styles.btn_title}>Tạo</Text>
+                        <Text style={Styles.btn_title}>Cập nhật</Text>
+                    </TouchableOpacity >
+                    <TouchableOpacity
+                        style={[Styles.inputBox, Styles.button]}
+                        onPress={() => this.props.onLogout()}
+                    >
+                        <Text style={Styles.btn_title}>Đăng xuất</Text>
                     </TouchableOpacity >
                 </View>
             </ThemeProvider>
@@ -278,12 +276,10 @@ const Styles = StyleSheet.create({
     },
 })
 const mapStateToProps = (state) => ({
-    Auth: state.Auth,
 })
 
 const mapDispatchToProps = dispatch => ({
-    onSignUp: (userName, password, firstName, lastName, birthday, gender) =>
-        dispatch(signUp(userName, password, firstName, lastName, birthday, gender))
+    onLogout: () => dispatch(logOut())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
+export default connect(mapStateToProps, mapDispatchToProps)(Info)
