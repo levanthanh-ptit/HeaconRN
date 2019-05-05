@@ -40,6 +40,7 @@ export default (state = initialState, action) => {
     case ActionTypes.SIGNIN_FAIL:
       return {
         ...state,
+        token: null,
         signinStatus: 'fail',
       };
     case ActionTypes.SIGNIN_RESET:

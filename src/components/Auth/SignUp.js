@@ -23,12 +23,6 @@ export class SignUp extends Component {
                     secureTextEntry: true,
                     errorMessage: ""
                 },
-                // {
-                //     name: 'confirmPassword',
-                //     label: 'Nhập lại mật khẩu',
-                //     textContentType: 'password',
-                //     secureTextEntry: true,
-                // },
                 {
                     name: 'firstName',
                     label: 'Tên',

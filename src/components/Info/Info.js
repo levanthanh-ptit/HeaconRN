@@ -10,26 +10,6 @@ export class Info extends Component {
         this.state = {
             elememts: [
                 {
-                    name: 'userName',
-                    label: 'Tên tài khoản',
-                    textContentType: 'username',
-                    secureTextEntry: false,
-                    errorMessage: ""
-                },
-                {
-                    name: 'password',
-                    label: 'Mật khẩu',
-                    textContentType: 'password',
-                    secureTextEntry: true,
-                    errorMessage: ""
-                },
-                // {
-                //     name: 'confirmPassword',
-                //     label: 'Nhập lại mật khẩu',
-                //     textContentType: 'password',
-                //     secureTextEntry: true,
-                // },
-                {
                     name: 'firstName',
                     label: 'Tên',
                     textContentType: 'name',
@@ -167,7 +147,7 @@ export class Info extends Component {
             elememts: elms
         })
         // if (isSubmitable)
-           
+
     }
     render() {
         var elements = this._renderField();
@@ -179,7 +159,7 @@ export class Info extends Component {
         return (
             <ThemeProvider>
                 <View style={Styles.signUpMainContainer}>
-                    <Text style={Styles.h1}>Thông tin tài khoản</Text>
+                    <Text style={Styles.h1}>Tài khoản</Text>
                     {elements}
                     <TouchableOpacity
                         style={[Styles.inputBox, Styles.button]}

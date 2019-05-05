@@ -51,7 +51,6 @@ export default class FriendList extends Component {
     }
     
     render() {
-        // console.log(this.state);
         return (
             <FlatList
                 style={Styles.FriendListMainContainer}

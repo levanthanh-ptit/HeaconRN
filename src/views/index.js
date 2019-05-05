@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage } from '@react-native-community/async-storage'
 import { connect } from 'react-redux'
 import { createAppContainer } from "react-navigation";
 import { rootStack } from '../navigators/RootNavigator'
 import { signStack } from '../navigators/SignNavigator'
-import {sessionSignIn} from '../redux/actions/AuthAction'
+import { sessionSignIn } from '../redux/actions/AuthAction'
 const SignContainer = createAppContainer(signStack)
 const AppContainer = createAppContainer(rootStack);
 export class index extends Component {
@@ -17,32 +17,17 @@ export class index extends Component {
     }
     async componentDidMount() {
         try {
-            let token = AsyncStorage.getItem('token')
-            this.props.sessionSignIn(token)
+            let token = await AsyncStorage.getItem('token')
+            if (token != null)
+                this.props.sessionSignIn(token)
         } catch (error) {
 
         }
     }
-    async componentDidUpdate(prevProps, prevState) {
-        console.log("update");
-        console.log(this.props.Auth);
-        
-        if (prevProps.Auth.token != this.props.Auth.token) {
-            if (this.props.Auth.token)
-                await this.setState({
-                    logedIn: true
-                })
-            else
-                await this.setState({
-                    logedIn: false
-                })
-        }
-    }
-    render() {
-        console.log(this.props.Auth.token);
 
+    render() {
         return (
-            this.state.logedIn ?
+            this.props.Auth.token ?
                 (
                     <AppContainer />
                 ) : (

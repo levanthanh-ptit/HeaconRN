@@ -1,5 +1,5 @@
 var constant = require('../../../static/constant');
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage } from '@react-native-community/async-storage';
 import * as ATs from '../actions/ActionTypes';
 
 export const signUpStart = () => ({
@@ -22,7 +22,7 @@ export const signInSuccess = (token) => ({
     token: token,
 })
 export const signInFail = () => ({
-    type: ATs.SIGNUP_FAIL,
+    type: ATs.SIGNIN_FAIL,
 })
 export const signInReset = () => ({
     type: ATs.SIGNIN_RESET,
@@ -59,8 +59,8 @@ export const signUp = (userName, password, firstName, lastName, birthday, gender
     }
 }
 export const signIn = (userName, password) => {
-    return dispatch => {
-        dispatch(signInStart());
+    return async dispatch => {
+        await dispatch(signInStart());
         let option = {
             method: 'POST',
             headers: {
@@ -72,24 +72,25 @@ export const signIn = (userName, password) => {
                 password: password,
             }),
         }
-        fetch(constant.server + '/login', option)
-            .then(res => res.json())
-            .then(res => {
-                console.log(res);
-                dispatch(signInSuccess(res.token));
-                AsyncStorage.setItem('token', res.token);
-            }).catch(error => {
-                dispatch(signInFail());
-            })
+        let res = await fetch(constant.server + '/login', option)
+        if (res.status == 200) {
+            let resJson = await res.json()
+            await dispatch(await signInSuccess(resJson.token));
+            AsyncStorage.setItem('token', resJson.token);
+        }
+        else {
+            await dispatch(signInFail());            
+        }
     }
 }
 export const sessionSignIn = (token) => {
-    return dispatch => { 
+    return dispatch => {
         dispatch(signInSession(token))
     }
 }
 export const logOut = () => {
-    return dispatch => { 
+    return dispatch => {
         dispatch(signInReset())
+        AsyncStorage.removeItem('token');
     }
 }

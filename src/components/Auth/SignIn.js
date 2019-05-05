@@ -22,7 +22,7 @@ export class SignIn extends Component {
     onSubmit() {
         this.props.onSignIn(this.state.userName, this.state.password)
     }
-    render() {
+    render() {        
         return (
             <View style={Styles.signInMainContainer}>
                 <Text style={Styles.h1}>Đăng Nhập</Text>
