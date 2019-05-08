@@ -24,7 +24,7 @@ export default class Home extends Component {
         </TouchableOpacity>
         <TouchableOpacity
           style={[Styles.button, Styles.boxWithShadow, Styles.balloon, Styles.matching_button]}
-          onPress={() => this.redirect('HomeSetting')} >
+          onPress={() => this.redirect('Love', null)} >
           <View style={[Styles.icon, Styles.balloon_title]}>
             <I name="heart" color="#ffffff" size="large" />
           </View>

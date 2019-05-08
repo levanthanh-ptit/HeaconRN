@@ -48,7 +48,7 @@ export default class Bubble extends Component {
             this.props.avatar
           ) : (
               <View style={Styles.Avatar}>
-                <I type="avatar" color='#ffffff' />
+                <I type='avatar' color='#ffffff' />
               </View>
             )
         ) : null}

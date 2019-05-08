@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, Dimensions, Image, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import I from '../UI/AppIcon'
 
@@ -10,11 +10,6 @@ export default class FriendBlock extends Component {
         friendLastMessage: PropTypes.string,
         onPress: PropTypes.func,
     }
-    // _calculateFriendDetailBoxSize = () => {
-    //     var device_width = Dimensions.get('window').width;
-    //     var FriendDetailBoxWidth = device_width - (Styles.friendAvatar.width + Styles.friendAvatar.margin * 2 + 10);
-    //     return FriendDetailBoxWidth = FriendDetailBoxWidth * 100.0 / device_width + '%'
-    // }
     _onPress = () => {
         this.props.onPress(this.props.id)
     }

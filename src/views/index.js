@@ -1,38 +1,46 @@
 import React, { Component } from 'react'
-import { AsyncStorage } from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-community/async-storage'
 import { connect } from 'react-redux'
-import { createAppContainer } from "react-navigation";
+import { createAppContainer } from "react-navigation"
 import { rootStack } from '../navigators/RootNavigator'
 import { signStack } from '../navigators/SignNavigator'
 import { sessionSignIn } from '../redux/actions/AuthAction'
+import Background from '../components/UI/Background'
+
 const SignContainer = createAppContainer(signStack)
-const AppContainer = createAppContainer(rootStack);
+const AppContainer = createAppContainer(rootStack)
 export class index extends Component {
     constructor(props) {
         super(props)
-
-        this.state = {
-            logedIn: false,
-        }
+        this._bootstrap_Auth = this._bootstrap_Auth.bind(this)
+        this._bootstrap_Auth()
     }
-    async componentDidMount() {
+    async _bootstrap_Auth() {
         try {
-            let token = await AsyncStorage.getItem('token')
+            console.log("_bootstrap_Auth");
+            let token = await AsyncStorage.getItem('token');
             if (token != null)
-                this.props.sessionSignIn(token)
+                await this.props.sessionSignIn(token);
+            return token
         } catch (error) {
+            console.log("_bootstrap_Auth:::error");
+            console.log(error);
 
         }
     }
 
     render() {
         return (
-            this.props.Auth.token ?
-                (
-                    <AppContainer />
-                ) : (
-                    <SignContainer />
-                )
+            <Background>
+                {this.props.Auth.token ?
+                    (
+                        <AppContainer />
+                    ) : (
+                        <SignContainer />
+                    )
+                    }
+            </Background>
+
         )
     }
 }

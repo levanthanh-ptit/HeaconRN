@@ -76,8 +76,7 @@ export const signIn = (userName, password) => {
         let res = await fetch(constant.server + '/login', option)
         if (res.status == 200) {
             let resJson = await res.json()
-            console.log(resJson);
-
+            
             await dispatch(await signInSuccess(resJson.token));
             await AsyncStorage.setItem('token', await resJson.token);
         }

@@ -9,8 +9,7 @@ export default class SrcHome extends Component {
   };
   render() {
     return (
-      <Background
-        id='HomeContainer'>
+      <Background id='HomeContainer'>
         <Home navigation={this.props.navigation}></Home>
       </Background>
     )

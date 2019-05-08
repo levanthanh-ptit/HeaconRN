@@ -17,8 +17,7 @@ export default class SrcChat extends Component {
     var userId = navigation.getParam('userId', null);
     var targerId = navigation.getParam('tagetId', null);
     return (
-      <Background
-        id='ChatContainer'>
+      <Background id='ChatContainer'>
         <Chat
           navigation={this.props.navigation}
           userId={userId}

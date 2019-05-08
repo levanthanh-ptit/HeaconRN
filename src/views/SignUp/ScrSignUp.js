@@ -17,7 +17,6 @@ export default class ScrSignUp extends Component {
     )
   }
 }
-
 const Styles = StyleSheet.create({
   scroll: {
     height: '100%',

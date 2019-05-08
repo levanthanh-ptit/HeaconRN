@@ -1,31 +1,51 @@
 import Icon from 'react-native-vector-icons/FontAwesome'
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react'
+export default class AppIcon extends Component {
+  constructor(props) {
+    super(props)
 
-const AppIcon = (props) => {
-  const [name, setName] = useState('info');
-  const [color, setColor] = useState('#000000');
-  const [size, setSize] = useState(30);
-  useEffect(() => {
-    if (props.name != null) setName(props.name);
-    if (props.color != null) setColor(props.color);
-    if (props.size != null) {
-      switch (props.size) {
+    this.state = {
+      name: 'info',
+      color: '#000000',
+      size: 30,
+    };
+  };
+  componentDidMount() {
+    if (this.props.name != null) this.setState({
+      name: this.props.name
+    });
+    if (this.props.color != null) this.setState({
+      color: this.props.color
+    });
+    if (this.props.size != null) {
+      switch (this.props.size) {
         case "small":
-          setSize(20)
+          this.setState({
+            size: 20
+          });
           break;
         case "medium":
-          setSize(40)
+          this.setState({
+            size: 40
+          });
           break;
         case "large":
-          setSize(60)
+          this.setState({
+            size: 60
+          });
           break;
         default:
-          setSize(props.size)
+          this.setState({
+            size: this.props.size
+          });
           break;
-      }
+      };
     }
-    if (props.type === 'avatar') setName('user');
-  }, [])
-  return (<Icon name={name} color={color} size={size} />)
+    if (this.props.type === 'avatar') this.setState({
+      name: 'user'
+    });
+  }
+  render() {
+    return (<Icon name={this.state.name} color={this.state.color} size={this.state.size} />)
+  }
 }
-export default AppIcon
