@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Text, StyleSheet, View, Dimensions, TextInput } from 'react-native'
+import { StyleSheet, View, Dimensions, TextInput, TouchableOpacity } from 'react-native'
 import * as Color from '../Color'
 
 export default class TypingBar extends Component {
@@ -8,40 +8,50 @@ export default class TypingBar extends Component {
         listAction: PropTypes.array,
         textSubmitAction: PropTypes.func,
     }
+    constructor(props) {
+        super(props)
 
-    _renderActionButton = (key, content) => 
-        <View
+        this.state = {
+            
+        };
+    };
+    
+    _renderActionButton = (key, content, action) =>
+        <TouchableOpacity
             key={key}
             style={Style.TypingActionButton}
+            onPress = {action}
         >
             {content}
-        </View>
-    
+        </TouchableOpacity>
+
     _renderListActionButtons = (position) => {
-        return this.props.listAction.map(a =>{
-            if(a.position === position) return this._renderActionButton(a.id, a.content)
+        return this.props.listAction.map(a => {
+            if (a.position === position) return this._renderActionButton(a.id, a.content, a.action)
         }
         );
     }
-    _calculateTypingBoxSize = () =>{
+    _calculateTypingBoxSize = () => {
         var { width } = Dimensions.get('window')
         var TypingBoxWidth = width - Style.TypingBarContainer.padding;
         this.props.listAction.map(() => {
-            TypingBoxWidth -= (Style.TypingActionButton.width 
-                + Style.TypingActionButton.margin*2
-                );
+            TypingBoxWidth -= (Style.TypingActionButton.width
+                + Style.TypingActionButton.margin * 2
+            );
         });
-        TypingBoxWidth -= Style.TypingBox.margin*2;
-        TypingBoxWidth = TypingBoxWidth*100.0/width + '%';
+        TypingBoxWidth -= Style.TypingBox.margin * 2;
+        TypingBoxWidth = TypingBoxWidth * 100.0 / width + '%';
         return TypingBoxWidth
     }
     render() {
-        
+        let device_w = this._calculateTypingBoxSize();
         return (
             <View style={Style.TypingBarContainer}>
                 {this._renderListActionButtons('left')}
-                <TextInput style={[Style.TypingBox, { width: this._calculateTypingBoxSize() }]}>
-                </TextInput>
+                <TextInput style={[Style.TypingBox, { width: device_w }]}
+                    onChangeText={e => this.props.onChange_inputText(e)}
+                    value = {this.props.inputText_value}
+                />
                 {this._renderListActionButtons('right')}
             </View>
         )

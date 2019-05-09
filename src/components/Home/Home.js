@@ -38,7 +38,7 @@ export default class Home extends Component {
           style={[Styles.button, Styles.btn_large, Styles.boxWithShadow, Styles.balloon, Styles.chat_button]}
           title="chat"
           onPress={() => this.redirect('FriendList')}>
-          <Text style={[Styles.btn_title, Styles.balloon_title]}>FRIENDS</Text>
+          <Text style={[Styles.btn_title, Styles.balloon_title]}>BẠN BÈ</Text>
 
           {/* balloon rope css */}
           <View style={[Styles.balloon_rope_box]}>

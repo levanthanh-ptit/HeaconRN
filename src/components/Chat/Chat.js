@@ -1,30 +1,42 @@
 import React, { Component } from 'react'
 import { View, FlatList, Clipboard } from 'react-native'
 import { connect } from 'react-redux'
-import axios from '../../../static/axios';
-import { Styles, BubbleColor } from './ChatStyle'
+import axios from '../../../static/axios'
+import openSocket from 'socket.io-client'
+import constant from '../../../static/constant';
+import { Styles } from './ChatStyle'
 import Bubble from './Bubble/Bubble'
 import TypingBar from './TypingBar/TypingBar'
 import I from '../UI/AppIcon'
+const uuidv1 = require('uuid/v1')
+var socket;
 
 export class Chat extends Component {
-  state = {
-    messages: null
-    // id,
-    // content,
-    // date
-    ,
-    selectedBubble: null
-    // id
-    ,
-  }
+
   constructor(props) {
     super(props)
+    this.emitMessage = this.emitMessage.bind(this)
+    this.state = {
+      loading: false,
+      messages: []
+      // _id,
+      // id,
+      // content,
+      // date
+      ,
+      selectedBubble: null
+      // id
+      ,
+      inputText: ''
+    }
   }
   async componentDidMount() {
     let token = this.props.Auth.token;
     if (!token) return;
     try {
+      await this.setState({
+        loading: true
+      })
       let res = await axios({
         method: 'POST',
         url: '/message/load',
@@ -38,22 +50,69 @@ export class Chat extends Component {
         }
       })
       if (res.data) {
-          let data = [];
-          data = await res.data.map(e => ({
-              _id: e._id,
-              id: e.id,
-              content: e.text,
-              date: new Date(e.date)
-          }))
-          await this.setState({
-            messages: data
-          })
+        let data = [];
+        data = await res.data.map(e => ({
+          _id: uuidv1(),
+          id: e.id,
+          content: e.text,
+          date: new Date(e.date)
+        }))
+        await this.setState({
+          messages: data
+        })
+        //open socket for recive and send mesage
+        socket = openSocket(constant.server);
+        socket.emit('CLIENT_CONNECT_MESSAGE', { token });
+        socket.on('SEND_MESSAGE_TO_CLIENT', data => this.onReceiveMessage(data))
+        await this.setState({
+          loading: false
+        })
       }
     } catch (error) {
       alert(error)
     }
-  }
 
+  }
+  onReceiveMessage(data) {
+    console.log('data');
+    console.log(data);
+    let _id = uuidv1();
+    let id = data.id;
+    let content = data.text;
+    let date = new Date(data.date);
+    this.setState({
+      messages: [
+        ...this.state.messages,
+        {
+          _id,
+          id,
+          content,
+          date
+        }],
+    })
+
+  }
+  async emitMessage() {
+    try {
+      await socket.emit('CLIENT_SEND_MESSAGE', {
+        token: this.props.Auth.token,
+        message: {
+          idFriend: this.props.idFriend,
+          text: this.state.inputText,
+        }
+      })
+      await this.setState({
+        inputText: ''
+      })
+    } catch (error) {
+      alert(error)
+    }
+  }
+  onChange_handle(name, value) {
+    this.setState({
+      [name]: value
+    })
+  }
   _deleteItem = (_id) => {
     var mess = this.state.messages.filter(e => {
       if (e._id != _id) return true
@@ -95,6 +154,7 @@ export class Chat extends Component {
   }
 
   render() {
+    if (this.state.loading) return false
     const buttonIconSize = 20;
     const buttonIconColor = '#666';
     var addActtionButton = {
@@ -111,10 +171,12 @@ export class Chat extends Component {
     }
     var sendActtionButton = {
       id: 3,
-      action: null,
+      action: this.emitMessage,
       content: <I name={'send'} color={'#DC143C'} size={buttonIconSize} />,
-      position: 'right'
+      position: 'right',
     }
+    console.log(this.state.messages.length);
+
     return (
       <View
         id='ChatContainer'
@@ -127,8 +189,13 @@ export class Chat extends Component {
           extraData={this.state}
           renderItem={this._renderBubble}
           keyExtractor={this._keyExtractor}
+          initialScrollIndex={this.state.messages?this.state.messages.length-1:0}
         />
-        <TypingBar listAction={[addImageActtionButton, addActtionButton, sendActtionButton]}></TypingBar>
+        <TypingBar
+          listAction={[addImageActtionButton, addActtionButton, sendActtionButton]}
+          onChange_inputText={(e) => this.onChange_handle("inputText", e)}
+          inputText_value={this.state.inputText}
+        />
       </View>
     )
   }

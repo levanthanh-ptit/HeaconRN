@@ -7,7 +7,7 @@ export default class ScrFriendList extends Component {
     static navigationOptions = ({ navigation }) => ({
         headerTitle:
             <View style={Styles.navigationHeader}>
-                <Text style={Styles.navigationTitle}>Friend list</Text>
+                <Text style={Styles.navigationTitle}>Bạn bè</Text>
             </View>,
         headerStyle: {
             // backgroundColor: 'blue',
