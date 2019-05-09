@@ -11,7 +11,7 @@ export default class FriendBlock extends Component {
         onPress: PropTypes.func,
     }
     _onPress = () => {
-        this.props.onPress(this.props.id)
+        this.props.onPress(this.props.id)        
     }
     render() {
         return (

@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
-import { Text, View, FlatList, Clipboard } from 'react-native'
+import { View, FlatList, Clipboard } from 'react-native'
+import { connect } from 'react-redux'
+import axios from '../../../static/axios';
 import { Styles, BubbleColor } from './ChatStyle'
 import Bubble from './Bubble/Bubble'
 import TypingBar from './TypingBar/TypingBar'
 import I from '../UI/AppIcon'
 
-export default class Chat extends Component {
+export class Chat extends Component {
   state = {
     messages: null
     // id,
     // content,
-    // type,
     // date
     ,
     selectedBubble: null
@@ -20,57 +21,70 @@ export default class Chat extends Component {
   constructor(props) {
     super(props)
   }
-  componentDidMount() {
-    //fake date for loading from route path
-
-    var mess = [];
-    for (let i = 0; i < 11; i++) {
-      var date = new Date();
-      date.setHours(10);
-      date.setMinutes(i);
-      mess.push({
-        id: i + '',
-        content: <Text selectable={true}>{'abc ' + i + (i % 3 == 0 ? 'divide perfect for 3 divide perfect for 3' : '')}</Text>,
-        type: (i % 2) == 0 ? 'my' : 'other',
-        date: date
-      });
+  async componentDidMount() {
+    let token = this.props.Auth.token;
+    if (!token) return;
+    try {
+      let res = await axios({
+        method: 'POST',
+        url: '/message/load',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        data: {
+          token: token,
+          idFriend: this.props.idFriend
+        }
+      })
+      if (res.data) {
+          let data = [];
+          data = await res.data.map(e => ({
+              _id: e._id,
+              id: e.id,
+              content: e.text,
+              date: new Date(e.date)
+          }))
+          await this.setState({
+            messages: data
+          })
+      }
+    } catch (error) {
+      alert(error)
     }
-    this.setState({
-      messages: mess,
-      selectedBubble: null,
-    })
   }
 
-  _deleteItem = (id) => {
+  _deleteItem = (_id) => {
     var mess = this.state.messages.filter(e => {
-      if (e.id != id) return true
+      if (e._id != _id) return true
     })
     this.setState({
       messages: mess
     })
   }
-  _CopyContent = (id) => {
+  _CopyContent = (_id) => {
     var content = null
     this.state.messages.map(e => {
-      if (e.id == id) content = e.content
+      if (e._id == _id) content = e.content
     })
-    Clipboard.setString(content.props.children);
+    Clipboard.setString(content);
   }
-  _onPressItem = (id) => {
-    var id = id == this.state.selectedBubble ? null : id;
+  _onPressItem = (_id) => {
+    let id = _id == this.state.selectedBubble ? null : _id;
     this.setState({
       selectedBubble: id,
     })
   }
 
-  _keyExtractor = (item, index) => item.id;
+  _keyExtractor = (item, index) => item._id;
 
   _renderBubble = ({ item }) => {
-    var selected = this.state.selectedBubble === item.id;
+    var selected = this.state.selectedBubble === item._id;
     return <Bubble
-      key={item.id}
+      key={item._id}
+      _id={item._id}
+      myId={this.props.myId}
       id={item.id}
-      type={item.type}
       onPressItem={this._onPressItem}
       selected={selected}
       onPressAction={this._CopyContent}
@@ -109,7 +123,6 @@ export default class Chat extends Component {
         <FlatList
           id='ChatList'
           style={Styles.ListBubbleWrapedContainer}
-          inverted={true}
           data={this.state.messages}
           extraData={this.state}
           renderItem={this._renderBubble}
@@ -120,4 +133,13 @@ export default class Chat extends Component {
     )
   }
 }
+const mapStateToProps = (state) => ({
+  Auth: state.Auth,
+})
+
+const mapDispatchToProps = dispatch => ({
+
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chat)
 

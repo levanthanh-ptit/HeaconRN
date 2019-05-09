@@ -1,41 +1,64 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, FlatList } from 'react-native'
+import { StyleSheet, FlatList } from 'react-native'
+import { connect } from 'react-redux'
 import FriendBlock from './FriendBlock'
-import ChatHeader from '../UI/ChatHeader';
+import axios from '../../../static/axios'
 
-export default class FriendList extends Component {
+export class FriendList extends Component {
 
     constructor(props) {
-      super(props)
-    
-      this.state = {
-        friends: [],
-      };
+        super(props)
+
+        this.state = {
+            friends: [
+                // {
+                //     friendId: '',
+                //     friendImageUrl: '',
+                //     name: '',
+                //     lastMessage: '',
+                // }
+            ],
+        };
     };
     async componentDidMount() {
-        var { friends } = this.state;
-        for (let i = 0; i < 3; i++) {
-            await friends.push({
-                friendId: '' + i,
-                friendImageUrl: '',
-                name: 'name ' + i,
-                lastMessage: 'hello mothafaka ' + i,
-            });
+        let token = this.props.Auth.token;
+        if (!token) return;
+        try {
+            let res = await axios({
+                method: 'POST',
+                url: '/message/friends',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                data: { token: token }
+            })
+            if (res.data.friend) {
+                let data = await res.data.friend.map(e => ({
+                    friendId: e.id,
+                    name: e.name,
+                    lastMessage: e.lastMessage,
+                    lastTime: e.lastTime,
+                }))
+                await this.setState({
+                    friends: data,
+                    myId: res.data.id
+                })
+            }
+        } catch (error) {
+            alert(error)
         }
-        this.setState({
-            friends: friends
-        })
+
     }
-    _onPressItem = (friendId) => {
-        var f_name = this.state.friends.map( e =>{
-            if(e.friendId==friendId) return e.name
-        })
-        // var chatHeader = <ChatHeader name={f_name}/>;
-        this.props.navigation.navigate('Chat',{
-            userId:'999999',
-            targerId: friendId,
+     _onPressItem = async (friendId) => {
+        var f_name = await this.state.friends.map(e => {
+            if (e.friendId == friendId) return e.name
+        })        
+        await this.props.navigation.navigate('Chat', {
+            myId: this.state.myId,
+            idFriend: friendId,
             friendName: f_name,
-            
+
         })
     }
     _keyExtractor = (item, index) => item.friendId;
@@ -49,7 +72,7 @@ export default class FriendList extends Component {
             onPress={this._onPressItem}
         />
     }
-    
+
     render() {
         return (
             <FlatList
@@ -72,3 +95,13 @@ const Styles = StyleSheet.create({
         padding: 5,
     }
 })
+
+const mapStateToProps = (state) => ({
+    Auth: state.Auth,
+})
+
+const mapDispatchToProps = dispatch => ({
+
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(FriendList)

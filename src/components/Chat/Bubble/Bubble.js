@@ -8,7 +8,6 @@ import I from '../../UI/AppIcon';
 export default class Bubble extends Component {
   static propTypes = {
     id: PropTypes.any,
-    type: PropTypes.string,
     onPressItem: PropTypes.func,
     selected: PropTypes.bool,
     onPressAction: PropTypes.func,
@@ -17,27 +16,26 @@ export default class Bubble extends Component {
     date: PropTypes.string,
   }
   _onPressBubble = () => {
-    this.props.onPressItem(this.props.id);
-    this.setState({
-
-    })
+    this.props.onPressItem(this.props._id);
   };
   _onPressAction = () => {
-    this.props.onPressAction(this.props.id)
+    this.props.onPressAction(this.props._id)
   }
   render() {
+
     var GroupContainerStyle = [Styles.WrapBubbleContainer];
     var bubbleStyle = [Styles.Bubble];
-    if (this.props.type == 'other') {
+    if (this.props.id !== this.props.myId) {
       GroupContainerStyle.push(Styles.WrapBubbleContainerLeft);
       bubbleStyle.push(Styles.BubbleLeft);
       if (this.props.selected) {
         bubbleStyle.push(Styles.BubbleLeftSelected);
       }
     }
-    else if (this.props.selected) {
-      bubbleStyle.push(Styles.BubbleSelected);
-    }
+    else
+      if (this.props.selected) {
+        bubbleStyle.push(Styles.BubbleSelected);
+      }
     return (
       <View
         className='GroupContainer'
@@ -61,13 +59,12 @@ export default class Bubble extends Component {
           >
             <Text>{this.props.date}</Text>
           </ExplandableView>}
-          {React.cloneElement(this.props.content,
-            {
-              style: bubbleStyle,
-              onPress: this._onPressBubble
-            }
-          )
-          }
+          <Text
+            style={bubbleStyle}
+            onPress={this._onPressBubble}
+          >
+            {this.props.content}
+          </Text>
           {this.props.selected && <ExplandableView
             className="bubble-detail"
             style={Styles.BubbleAfter}
@@ -75,7 +72,6 @@ export default class Bubble extends Component {
             <Text> seen </Text>
           </ExplandableView>}
         </View>
-
         {this.props.selected && <FadeInView>
           <TouchableOpacity
             className='AcctionButton'

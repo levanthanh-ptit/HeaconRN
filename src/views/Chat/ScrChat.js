@@ -14,14 +14,14 @@ export default class SrcChat extends Component {
   });
   render() {
     const { navigation } = this.props;
-    var userId = navigation.getParam('userId', null);
-    var targerId = navigation.getParam('tagetId', null);
+    var myId = navigation.getParam('myId', null);
+    var idFriend = navigation.getParam('idFriend', null);
     return (
       <Background id='ChatContainer'>
         <Chat
           navigation={this.props.navigation}
-          userId={userId}
-          targerId={targerId}
+          myId={myId}
+          idFriend={idFriend}
         />
       </Background>
     )
