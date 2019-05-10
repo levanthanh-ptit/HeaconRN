@@ -4,6 +4,8 @@ import { Input, CheckBox } from 'react-native-elements';
 import { connect } from 'react-redux'
 import { ThemeProvider } from 'react-native-elements';
 import { logOut } from '../../redux/actions/AuthAction'
+import axios from './../../../static/axios'
+
 export class Info extends Component {
     constructor(props) {
         super(props)
@@ -46,13 +48,13 @@ export class Info extends Component {
                     ]
                 }
             ],
-            userName: 'levanthanh001',
-            password: '123456Aa',
+            // userName: 'levanthanh001',
+            // password: '123456Aa',
             // confirmPassword: '',
-            firstName: 'Lê',
-            lastName: 'Thành',
-            gender: 'male',
-            birthday: '11/9/2012',
+            firstName: '',
+            lastName: '',
+            gender: '',
+            birthday: '',
         }
     }
     _renderField() {
@@ -76,19 +78,38 @@ export class Info extends Component {
                 </View>
             }
             else
-                return <View key={el.name} style={Styles.inputBox}>
-                    <Input
-                        label={el.label}
-                        labelStyle={Styles.title}
-                        placeholder={el.placeholder}
-                        textContentType={el.textContentType}
-                        inputStyle={Styles.input}
-                        onChangeText={e => this.onChange_handle(el.name, e)}
-                        value={this.state[el.name]}
-                        secureTextEntry={el.secureTextEntry}
-                        errorMessage={el.errorMessage}
-                    />
-                </View>
+                if (el.name === 'birthday')
+                {
+                    var date = new Date(this.state.birthday);
+                    var birthday = date.getDate()+'/'+date.getMonth()+'/'+date.getFullYear();
+                    return <View key={el.name} style={Styles.inputBox}>
+                        <Input
+                            label={el.label}
+                            labelStyle={Styles.title}
+                            placeholder={el.placeholder}
+                            textContentType={el.textContentType}
+                            inputStyle={Styles.input}
+                            onChangeText={e => this.onChange_handle(el.name, e)}
+                            value={birthday}
+                            secureTextEntry={el.secureTextEntry}
+                            errorMessage={el.errorMessage}
+                        />
+                    </View>
+                }
+                else
+                    return <View key={el.name} style={Styles.inputBox}>
+                        <Input
+                            label={el.label}
+                            labelStyle={Styles.title}
+                            placeholder={el.placeholder}
+                            textContentType={el.textContentType}
+                            inputStyle={Styles.input}
+                            onChangeText={e => this.onChange_handle(el.name, e)}
+                            value={this.state[el.name]}
+                            secureTextEntry={el.secureTextEntry}
+                            errorMessage={el.errorMessage}
+                        />
+                    </View>
         })
     }
     async onOpenDatePicker() {
@@ -149,24 +170,44 @@ export class Info extends Component {
         // if (isSubmitable)
 
     }
+    async componentDidMount() {
+        var info;
+        var token = this.props.Auth.token;
+        let res = await axios({
+            method: 'POST',
+            url: '/info',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            data: { token }
+        })
+        info = await res.data;
+        await this.setState({
+            firstName: info.firstName,
+            lastName: info.lastName,
+            gender: info.gender,
+            birthday: info.birthday,
+        })
+    }
     render() {
         var elements = this._renderField();
-        const birthday = (this.state.birthday.day && this.state.birthday.month && this.state.birthday.year) ?
-            this.state.birthday.day + '/'
-            + this.state.birthday.month + '/'
-            + this.state.birthday.year
-            : ''
+        // const birthday = (this.state.birthday.day && this.state.birthday.month && this.state.birthday.year) ?
+        //     this.state.birthday.day + '/'
+        //     + this.state.birthday.month + '/'
+        //     + this.state.birthday.year
+        //     : ''
         return (
             <ThemeProvider>
                 <View style={Styles.signUpMainContainer}>
                     <Text style={Styles.h1}>Tài khoản</Text>
                     {elements}
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         style={[Styles.inputBox, Styles.button]}
                         onPress={() => this.onSubmit()}
                     >
                         <Text style={Styles.btn_title}>Cập nhật</Text>
-                    </TouchableOpacity >
+                    </TouchableOpacity > */}
                     <TouchableOpacity
                         style={[Styles.inputBox, Styles.button]}
                         onPress={() => this.props.onLogout()}
@@ -256,6 +297,7 @@ const Styles = StyleSheet.create({
     },
 })
 const mapStateToProps = (state) => ({
+    Auth: state.Auth
 })
 
 const mapDispatchToProps = dispatch => ({

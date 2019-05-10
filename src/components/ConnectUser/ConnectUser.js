@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { View, Animated, Dimensions, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import I from '../UI/AppIcon';
+import axios from './../../../static/axios'
+import openSocket from 'socket.io-client'
+import constant from './../../../static/constant'
 const d_height = Dimensions.get('window').height;
 const d_width = Dimensions.get('window').width;
 export class ConnectUser extends Component {
@@ -10,7 +13,42 @@ export class ConnectUser extends Component {
         Height: new Animated.Value(100),
         BorderRadius: new Animated.Value(50),
     }
+    async find_lover(){
+        console.log("aaaaaa");
+        var token = this.props.Auth;
+        
+        socket = openSocket(constant.server);
+        var info;
+        let res = await axios({
+            method: 'POST',
+            url: '/info',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            data: token 
+        })
+        info = res.data;
+        
+        socket.emit('FIND_LOVER',info.id);
+        socket.on('FIND_OUT', (id) =>{
+            console.log(id);
+            this.props.navigation.navigate('Chat',{
+                myId : info.id,
+                idFriend : id
+            });
+           
+        })
+        await setTimeout(() => {
+            //alert('Không Tìm Được Người Phù Hợp');
+            this.props.navigation.navigate('Home',);
+            socket.close();
+        },5*60*1000);
+        
+    }
     componentDidMount() {
+        
+        this.find_lover();
         Animated.timing(
             this.state.Height,
             {
@@ -52,7 +90,7 @@ export class ConnectUser extends Component {
 }
 
 const mapStateToProps = (state) => ({
-
+    Auth: state.Auth,
 })
 
 const mapDispatchToProps = {

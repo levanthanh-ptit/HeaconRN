@@ -73,22 +73,24 @@ export class Chat extends Component {
     }
 
   }
-  onReceiveMessage(data) {
+  async onReceiveMessage(data) {
     console.log('data');
-    console.log(data);
-    let _id = uuidv1();
-    let id = data.id;
-    let content = data.text;
-    let date = new Date(data.date);
-    this.setState({
-      messages: [
-        ...this.state.messages,
-        {
-          _id,
-          id,
-          content,
-          date
-        }],
+    await console.log(data);
+    let _id = await uuidv1();
+    let id = await data.id;
+    let content = await data.text;
+    let date = await new Date(data.date);
+    var messages = this.state.messages;
+    messages.push(
+      {
+        _id,
+        id,
+        content,
+        date
+      }
+    )
+    await this.setState({
+      messages: messages,
     })
 
   }
@@ -175,8 +177,7 @@ export class Chat extends Component {
       content: <I name={'send'} color={'#DC143C'} size={buttonIconSize} />,
       position: 'right',
     }
-    console.log(this.state.messages.length);
-
+    console.log(this.state.messages);
     return (
       <View
         id='ChatContainer'
@@ -189,7 +190,6 @@ export class Chat extends Component {
           extraData={this.state}
           renderItem={this._renderBubble}
           keyExtractor={this._keyExtractor}
-          initialScrollIndex={this.state.messages?this.state.messages.length-1:0}
         />
         <TypingBar
           listAction={[addImageActtionButton, addActtionButton, sendActtionButton]}

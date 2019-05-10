@@ -9,7 +9,7 @@ export default class ScrLove extends Component {
     render() {
         return (
             <Background>
-                <ConnectUser/>
+                <ConnectUser navigation={this.props.navigation}/>
             </Background>       
         )
     }
