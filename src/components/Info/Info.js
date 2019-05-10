@@ -48,9 +48,6 @@ export class Info extends Component {
                     ]
                 }
             ],
-            // userName: 'levanthanh001',
-            // password: '123456Aa',
-            // confirmPassword: '',
             firstName: '',
             lastName: '',
             gender: '',
